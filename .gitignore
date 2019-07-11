@@ -1,0 +1,12 @@
+
+\.idea/
+
+build/
+
+dist/
+
+nxstxm_validator\.egg-info/
+
+nxstxm_validate\.egg-info/
+
+nxstxm_validate/__pycache__/
