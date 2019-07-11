@@ -42,7 +42,7 @@ To validate a single file:
  
  To validate all files within a directory:
  
- ```nxstxm_validate('-d C:/data/2019/0710'.split())```
+ ```nxstxm_validate(r'-d C:/data/2019/0710'.split())```
 
 
 ## Contributing
