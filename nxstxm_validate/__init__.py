@@ -788,7 +788,12 @@ def check_nxdata_group(nf, cntr_lst=[], nxstxm_nxdl=None):
         else:
             # check that the stxm_scan_type is correct
             tabbed_print(num_tabs + 2, '### checking <%s> stxm_scan_type:' % cntr)
-            nf_stxm_scan_type = bytes(nf[cntr]['stxm_scan_type'][()]).decode('utf-8')
+            if (isinstance(nf[cntr]['stxm_scan_type'][()], bytes)):
+                #make it of type str
+                nf_stxm_scan_type = bytes(nf[cntr]['stxm_scan_type'][()]).decode('utf-8')
+            else:
+                nf_stxm_scan_type = nf[cntr]['stxm_scan_type'][()]
+
             if (isinstance(nf_stxm_scan_type, str)):
                 nf_stxm_scan_type = nf_stxm_scan_type.lower()
                 if (str_in_lst(nf_stxm_scan_type, nxstxm_scan_type_lst)):
