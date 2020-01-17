@@ -36,7 +36,8 @@ Start by creating a clone of the repo:
 ```pip install .```
 
 This will create a **nxstxm_validator** directory with all of the software in it and also place the script
-```nxstxm_validator``` in the python distrobutions ```Scripts``` directory.
+```nxstxm_validator``` in the python distributions ```Scripts``` directory if Windows and the ```bin``` directory
+if linux.
 
 
 ## Validating an nxstxm file or all files within a directory 
