@@ -526,9 +526,9 @@ def check_nxentry_group(nf, entry_str, nxstxm_nxdl):
     res = True
 
     print('\n')
-    tabbed_print(num_tabs, '####################################################################', lvl=3)
-    tabbed_print(num_tabs, '### checking for nxentry group called <%s>:' % entry_str, lvl=3)
-    tabbed_print(num_tabs, '####################################################################', lvl=3)
+    tabbed_print(num_tabs, '####################################################################', lvl=0)
+    tabbed_print(num_tabs, '### checking for nxentry group called <%s>:' % entry_str, lvl=0)
+    tabbed_print(num_tabs, '####################################################################', lvl=0)
     if (not check_grp_and_nxclass(nf, entry_str, 'NXentry')):
         tabbed_print(num_tabs, 'NXstxm file has no or non-standard NXentry group named [%s]' % entry_str, lvl=0)
         res = False
@@ -950,10 +950,21 @@ def check_attrs_of_nxclass(nxgrp, attr_lst=[]):
             #     for a_nm in nxgrp.attrs['axes']:
             #         check_for_corresponding_data_group(nxgrp, a_nm)
             if (type(nxgrp.attrs[a]) is str):
-                ret = check_for_corresponding_data_group(nxgrp, nxgrp.attrs[a])
+                if (ret is False):
+                    # if it has been set to False do not allow a succesful subsequent call
+                    # to set it to True
+                    check_for_corresponding_data_group(nxgrp, nxgrp.attrs[a])
+                else:
+                    ret = check_for_corresponding_data_group(nxgrp, nxgrp.attrs[a])
+
             elif ((type(nxgrp.attrs[a]) is list) or (type(nxgrp.attrs[a]) is np.ndarray)):
                 for a_nm in nxgrp.attrs[a]:
-                    ret = check_for_corresponding_data_group(nxgrp, a_nm)
+                    if(ret is False):
+                        #if it has been set to False do not allow a succeful subsequent call
+                        #to set it to True
+                        check_for_corresponding_data_group(nxgrp, a_nm)
+                    else:
+                        ret = check_for_corresponding_data_group(nxgrp, a_nm)
             else:
                 print('check_attrs_of_nxclass: OOPS')
 
@@ -1070,7 +1081,7 @@ def check_stxm_file(stxm_file, nxstxm_nxdl):
     nf = h5py.File(stxm_file, "r")
     e_lst = get_entry_names(nf)
 
-    print('\n\n \033[1;37;44m  Validating nxstxm file [%s]:' % stxm_file)
+    tabbed_print(0, '\n\n Validating nxstxm file [%s]:' % stxm_file, lvl=0)
 
     for entry in e_lst:
         res = True
@@ -1081,6 +1092,7 @@ def check_stxm_file(stxm_file, nxstxm_nxdl):
         # tabbed_print(num_tabs, 'entry[%s] is an NXstxm type ' % entry)
         if (not check_nxentry_group(nf, entry, nxstxm_nxdl)):
             print_check_error(entry, 'NXstxm file has non-standard NXentry group named [%s]' % entry)
+            res = False
             # break
         print('')
         nxentry = nf[entry]
@@ -1090,11 +1102,13 @@ def check_stxm_file(stxm_file, nxstxm_nxdl):
             # break
             # the collection group is an optional group so dont calv
 
+
         print('')
         if (not check_nxcontrol_group(nxentry, nxstxm_nxdl=nxstxm_nxdl)):
-            print_check_error(entry, 'NXstxm file has non-standard NXmonitor group')
+            print_check_warning(entry, 'NXstxm file has non-standard NXmonitor group, but this group is optional')
             # break
             # the control group is an optional group so dont calv
+
 
         print('')
         c_lst = get_counter_names(nxentry)

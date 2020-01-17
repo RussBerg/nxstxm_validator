@@ -13,7 +13,7 @@ setup(name='nxstxm_validate.py',
       author_email='russ.berg@lightsource.ca',
       url='https://www.lightsource.ca',
       packages=['nxstxm_validate'],
-      scripts=['nxstxm_validate//nxstxm_validate.bat'],
+      scripts=['nxstxm_validate//nxstxm_validate.bat','nxstxm_validate//nxstxm_validate'],
       install_requires=[
           'nexpy',
           'xmltodict',
