@@ -31,18 +31,23 @@ Start by creating a clone of the repo:
 
 ```C:\tmp\Feb21>git clone https://github.com/RussBerg/nxstxm_validator.git```
 
-This will create a **nxstxm_validator** directory with all of the software in it.
+2. From that directory type
+
+```pip install .```
+
+This will create a **nxstxm_validator** directory with all of the software in it and also place the script
+```nxstxm_validator``` in the python distrobutions ```Scripts``` directory.
 
 
 ## Validating an nxstxm file or all files within a directory 
 
 To validate a single file:
 
- ```nxstxm_validate(r'-f C:/data/2019/0710/C190710197.hdf5'.split())```
+ ```nxstxm_validate -f C:/data/2019/0710/C190710197.hdf5```
  
  To validate all files within a directory:
  
- ```nxstxm_validate(r'-d C:/data/2019/0710'.split())```
+ ```nxstxm_validate -d C:/data/2019/0710```
 
 The structure of each entry found in the file will be traversed and a quick check done to make sure that
 fields and attributes that are required by the nxstxm definition exist in the file. 

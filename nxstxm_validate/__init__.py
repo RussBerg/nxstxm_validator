@@ -1,36 +1,5 @@
-# import sys
-# from suitcase.nxstxm.nxstxm_validate.nxstxm_validate.nxstxm_validate import nxstxm_validate
-#
-# #nxstxm_validate.main('-d C:\controls\py2.7\Beamlines\sm\data\guest\May19'.split())
-# def validate(fpath):
-#     return(nxstxm_validate.nxstxm_validate(fpath))
-#
-#
-# def nxstxm_validate(argv):
-#     import sys, getopt
-#
-#     try:
-#         opts, args = getopt.getopt(argv, 'f:d:', ["file=", "dir="])
-#     except getopt.GetoptError:
-#         print('\t USAGE: nxstxm_validate [-f <file> -d <directory>]')
-#         sys.exit(2)
-#     if (len(opts) == 0):
-#         print('invalid arguments given')
-#         print('\t USAGE: nxstxm_validate [-f <file> -d <directory>]')
-#         sys.exit(2)
-#     for opt, arg in opts:
-#         if opt == '-h':
-#             print('\t USAGE: nxstxm_validate [-f <file> or -d <directory>]')
-#             sys.exit()
-#         elif opt in ("-f", "--file"):
-#             validate_file(arg)
-#         elif opt in ("-d", "--dir"):
-#             validate_filesin_dir(arg)
-#
-#
-
-
 #!python
+
 '''
 Created on Jun 29, 2016
 
@@ -1216,21 +1185,21 @@ def validate_file(fpath):
     return (res)
 
 
-def nxstxm_validate(argv):
+def validate(argv):
     import sys, getopt
 
     try:
         opts, args = getopt.getopt(argv, 'f:d:', ["file=", "dir="])
     except getopt.GetoptError:
-        print('\t USAGE: nxstxm_validate [-f <file> -d <directory>]')
+        print('\t USAGE: nxstxm_validate.py [-f <file> -d <directory>]')
         sys.exit(2)
     if (len(opts) == 0):
         print('invalid arguments given')
-        print('\t USAGE: nxstxm_validate [-f <file> -d <directory>]')
+        print('\t USAGE: nxstxm_validate.py [-f <file> -d <directory>]')
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
-            print('\t USAGE: nxstxm_validate [-f <file> or -d <directory>]')
+            print('\t USAGE: nxstxm_validate.py [-f <file> or -d <directory>]')
             sys.exit()
         elif opt in ("-f", "--file"):
             validate_file(arg)
@@ -1239,15 +1208,18 @@ def nxstxm_validate(argv):
 
 
 # if __name__ == "__main__":
-#     # nxstxm_validate(sys.argv[1:])
-#     # nxstxm_validate('-d C:\controls\py2.7\Beamlines\sm\data\guest\May19'.split())
-#     # nxstxm_validate(r'-f C:\\controls\\py2.7\\Beamlines\\sm\\data\\guest\\testdir\\C160810039.hdf5'.split())
-#     # nxstxm_validate(r'-f C:\Continuum\Anaconda3\Lib\site-packages\suitcase\nxstxm\tests\test_results\CTEST000.hdf5'.split())
-#     # nxstxm_validate('-d C:\controls\py2.7\Beamlines\sm\data\SLS_pixelator_files'.split())
-#     # nxstxm_validate(r'-f S:\STXM-data\Cryo-STXM\2019\guest\0710\C190710066.hdf5'.split())
-#     # nxstxm_validate(r'-f C:\tmp\bad_tomo_data\C190621185.hdf5'.split())
-#     nxstxm_validate(r'-d S:\STXM-data\Cryo-STXM\2019\guest\0622'.split())
-#     # nxstxm_validate(r'-f C:\tmp\aph_jul10\C190710197\C190710197.hdf5'.split())
+#     # nxstxm_validate.py(sys.argv[1:])
+#     # nxstxm_validate.py('-d C:\controls\py2.7\Beamlines\sm\data\guest\May19'.split())
+#     # nxstxm_validate.py(r'-f C:\\controls\\py2.7\\Beamlines\\sm\\data\\guest\\testdir\\C160810039.hdf5'.split())
+#     # nxstxm_validate.py(r'-f C:\Continuum\Anaconda3\Lib\site-packages\suitcase\nxstxm\tests\test_results\CTEST000.hdf5'.split())
+#     # nxstxm_validate.py('-d C:\controls\py2.7\Beamlines\sm\data\SLS_pixelator_files'.split())
+#     # nxstxm_validate.py(r'-f S:\STXM-data\Cryo-STXM\2019\guest\0710\C190710066.hdf5'.split())
+#     # nxstxm_validate.py(r'-f C:\tmp\bad_tomo_data\C190621185.hdf5'.split())
+#     nxstxm_validate.py(r'-d S:\STXM-data\Cryo-STXM\2019\guest\0622'.split())
+#     # nxstxm_validate.py(r'-f C:\tmp\aph_jul10\C190710197\C190710197.hdf5'.split())
+
+if __name__ == '__main__':
+    sys.exit(validate(sys.argv))
 
 __version__ = '1.0.1'
 
@@ -1258,4 +1230,4 @@ __requires__ = [
     'pkg_resources'
 ]
 
-__all__ = ['validate']    
+__all__ = ['validate']
